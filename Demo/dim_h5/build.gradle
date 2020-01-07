@@ -12,6 +12,9 @@ dependencies {
     annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
     annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
 
+    implementation rootProject.ext.dependencies["tbssdk"]
+    implementation rootProject.ext.dependencies["gson"]
+
     testImplementation rootProject.ext.support["junit"]
     androidTestImplementation rootProject.ext.support["android-junit"]
     androidTestImplementation rootProject.ext.support["android-espresso"]

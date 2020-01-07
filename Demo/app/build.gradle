@@ -31,7 +31,7 @@ dependencies {
     androidTestImplementation rootProject.ext.support["android-espresso"]
     implementation project(path: ':dim_framework')
     if(!isWebModule.toBoolean()){
-        implementation project(path: ':dim_web')
+        implementation project(path: ':dim_h5')
     }
     if(!isWebModule.toBoolean()) {
         implementation project(path: ':dim_kotlin')
