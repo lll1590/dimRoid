@@ -1,0 +1,74 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled true
+    }
+}
+
+dependencies {
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api rootProject.ext.support["constraint-layout"]
+    api rootProject.ext.support["annotation"]
+    api rootProject.ext.support["appcompat"]
+    api rootProject.ext.support["lifecycle-extensions"]
+    api rootProject.ext.support["recyclerview"]
+    api rootProject.ext.support["viewpager2"]
+    api rootProject.ext.support["legacy-support-v4"]
+    api rootProject.ext.support["legacy-support-v13"]
+
+    api rootProject.ext.dependencies["arouter-api"]
+
+    api rootProject.ext.dependencies.rxjava
+    api rootProject.ext.dependencies.rxandroid
+    api rootProject.ext.dependencies.eventbus
+
+    api rootProject.ext.dependencies.rxbinding
+    api rootProject.ext.dependencies.rxpermissions
+
+    api rootProject.ext.dependencies.glide
+    annotationProcessor rootProject.ext.dependencies["glide-compiler"]
+
+    api rootProject.ext.dependencies["lifecycle-extensions"]
+    annotationProcessor rootProject.ext.dependencies["lifecycle-compiler"]
+
+    api rootProject.ext.dependencies.dagger
+    annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
+
+    api rootProject.ext.dependencies.stetho
+//    api rootProject.ext.dependencies.MultiImageSelector
+
+    testImplementation rootProject.ext.support["junit"]
+    androidTestImplementation rootProject.ext.support["android-junit"]
+    androidTestImplementation rootProject.ext.support["android-espresso"]
+}

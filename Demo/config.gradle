@@ -1,0 +1,83 @@
+ext {
+    //android开发版本配置
+    android = [
+            compileSdkVersion: 28,
+            buildToolsVersion: "28.0.3",
+            applicationId    : "com.fly.tour",
+            minSdkVersion    : 19,
+            targetSdkVersion : 28,
+            versionCode      : 1,
+            versionName      : "1.0",
+    ]
+    //version配置
+    versions = [
+            "support-version-1.1.0" : "1.1.0",
+            "lifecycler-version" : "2.1.0",
+            "legacy-version" : "1.0.0",
+            "junit-version"  : "4.12",
+            "android-junit-version" : "1.1.0",
+            "android-espresso-version" : "3.1.1",
+    ]
+    //support配置
+    support = [
+            "constraint-layout"       : "androidx.constraintlayout:constraintlayout:2.0.0-beta2",
+            "annotation"              : "androidx.annotation:annotation:${versions["support-version-1.1.0"]}",
+            "appcompat"               : "androidx.appcompat:appcompat:${versions["support-version-1.1.0"]}",
+            "lifecycle-extensions"    : "androidx.lifecycle:lifecycle-extensions:${versions["lifecycler-version"]}",
+            "recyclerview"            : "androidx.recyclerview:recyclerview:1.0.0",
+            "viewpager2"              : "androidx.viewpager2:viewpager2:1.0.0-beta04",
+            "legacy-support-v4"       : "androidx.legacy:legacy-support-v4:${versions["legacy-version"]}",
+            "legacy-support-v13"      : "androidx.legacy:legacy-support-v13:${versions["legacy-version"]}",
+
+            'junit'                   : "junit:junit:${versions["junit-version"]}",
+            'android-junit'           : "androidx.test.ext:junit:${versions["android-junit-version"]}",
+            'android-espresso'        : "androidx.test.espresso:espresso-core:${versions["android-espresso-version"]}",
+    ]
+    //依赖第三方配置
+    dependencies = [
+            //rxjava
+            "rxjava"                               : "io.reactivex.rxjava2:rxjava:2.2.3",
+            "rxandroid"                            : "io.reactivex.rxjava2:rxandroid:2.1.0",
+            //rx系列与View生命周期同步
+            "rxlifecycle"                          : "com.trello.rxlifecycle2:rxlifecycle:2.2.2",
+            "rxlifecycle-components"               : "com.trello.rxlifecycle2:rxlifecycle-components:2.2.2",
+            //rxbinding
+            "rxbinding"                            : "com.jakewharton.rxbinding2:rxbinding:2.1.1",
+            //rx 6.0权限请求
+            "rxpermissions"                        : "com.lovedise:permissiongen:0.0.6",
+            //network
+            "okhttp"                               : "com.squareup.okhttp3:okhttp:3.10.0",
+            "retrofit"                             : "com.squareup.retrofit2:retrofit:2.4.0",
+            "converter-gson"                       : "com.squareup.retrofit2:converter-gson:2.4.0",
+            "adapter-rxjava"                       : "com.squareup.retrofit2:adapter-rxjava2:2.4.0",
+            "logging-interceptor"                  : "com.squareup.okhttp3:logging-interceptor:3.9.1",
+
+            //glide图片加载
+            "glide"                                : "com.github.bumptech.glide:glide:4.8.0",
+            "glide-compiler"                       : "com.github.bumptech.glide:compiler:4.8.0",
+            //json解析
+            "gson"                                 : "com.google.code.gson:gson:2.8.5",
+
+            //Google AAC
+            "lifecycle-extensions"                 : 'androidx.lifecycle:lifecycle-extensions:2.0.0',
+            "lifecycle-compiler"                   : 'androidx.lifecycle:lifecycle-compiler:2.0.0',
+            //阿里路由框架
+            "arouter-api"                          : "com.alibaba:arouter-api:1.4.1",
+            "arouter-compiler"                     : "com.alibaba:arouter-compiler:1.2.2",
+            //消息机制
+            "eventbus"                             : "org.greenrobot:eventbus:3.1.1",
+            //注解
+            "dagger"                               : "com.google.dagger:dagger:2.13",
+            "dagger-compiler"                      : "com.google.dagger:dagger-compiler:2.13",
+            //开发工具
+            "stetho"                               : "com.facebook.stetho:stetho:1.3.1",
+            //图片选择框架
+            "MultiImageSelector"                   : "com.github.lovetuzitong:MultiImageSelector:1.2",
+            "SmartRefreshLayout"                   : 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-andx-7',
+            "SmartRefreshHeader"                   : 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-andx-7',
+            "rounded-imageview"                    : "com.makeramen:roundedimageview:2.2.1",
+    ]
+
+}
+
+

@@ -1,0 +1,19 @@
+apply from: "../module.build.gradle"
+android {
+    defaultConfig {
+        if (isFlutterModule.toBoolean()) {
+            applicationId "com.dim.ke.flutterbridger"
+        }
+    }
+}
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':dim_framework')
+    implementation project(path: ':flutter')
+    annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
+    annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
+
+    testImplementation rootProject.ext.support["junit"]
+    androidTestImplementation rootProject.ext.support["android-junit"]
+    androidTestImplementation rootProject.ext.support["android-espresso"]
+}

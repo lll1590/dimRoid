@@ -1,0 +1,23 @@
+apply from: "../module.build.gradle"
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+android {
+    defaultConfig {
+        if (isKotlinModule.toBoolean()) {
+            applicationId "com.dim.ke.kotlin"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.0.2'
+    implementation project(':dim_framework')
+    annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
+    annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
+
+    testImplementation rootProject.ext.support["junit"]
+    androidTestImplementation rootProject.ext.support["android-junit"]
+    androidTestImplementation rootProject.ext.support["android-espresso"]
+}

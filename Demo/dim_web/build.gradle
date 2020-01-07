@@ -1,0 +1,18 @@
+apply from: "../module.build.gradle"
+android {
+    defaultConfig {
+        if (isWebModule.toBoolean()) {
+            applicationId "com.dim.ke.web"
+        }
+    }
+}
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':dim_framework')
+    annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
+    annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
+
+    testImplementation rootProject.ext.support["junit"]
+    androidTestImplementation rootProject.ext.support["android-junit"]
+    androidTestImplementation rootProject.ext.support["android-espresso"]
+}

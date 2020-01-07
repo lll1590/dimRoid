@@ -1,0 +1,10 @@
+include ':app', ':dim_framework', ':dim_web', ':dim_flutter_bridger', ':dim_kotlin'
+setBinding(new Binding([gradle: this]))
+evaluate(new File(
+  settingsDir,
+  '../dim_flutter/.android/include_flutter.groovy'
+))
+rootProject.name='Demo'
+
+include ':dim_flutter'
+project(':dim_flutter').projectDir = new File('../dim_flutter')
