@@ -34,6 +34,10 @@ android {
     dataBinding {
         enabled true
     }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
 }
 
 dependencies {
@@ -51,22 +55,36 @@ dependencies {
 
     api rootProject.ext.dependencies.rxjava
     api rootProject.ext.dependencies.rxandroid
-    api rootProject.ext.dependencies.eventbus
+    implementation rootProject.ext.dependencies.eventbus
 
     api rootProject.ext.dependencies.rxbinding
     api rootProject.ext.dependencies.rxpermissions
 
-    api rootProject.ext.dependencies.glide
+    implementation rootProject.ext.dependencies.glide
     annotationProcessor rootProject.ext.dependencies["glide-compiler"]
 
     api rootProject.ext.dependencies["lifecycle-extensions"]
     annotationProcessor rootProject.ext.dependencies["lifecycle-compiler"]
+
+    //json解析
+    api rootProject.ext.dependencies.gson
+    //network
+    implementation rootProject.ext.dependencies.okhttp
+    implementation rootProject.ext.dependencies.retrofit
+    implementation rootProject.ext.dependencies["converter-gson"]
+    implementation rootProject.ext.dependencies["adapter-rxjava"]
+
+    //rx管理View的生命周期
+    api rootProject.ext.dependencies.rxlifecycle-components
+    implementation rootProject.ext.dependencies.rxlifecycle
 
     api rootProject.ext.dependencies.dagger
     annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
 
     api rootProject.ext.dependencies.stetho
 //    api rootProject.ext.dependencies.MultiImageSelector
+    implementation rootProject.ext.dependencies["logger"]
+    implementation rootProject.ext.dependencies["logging-interceptor"]
 
     testImplementation rootProject.ext.support["junit"]
     androidTestImplementation rootProject.ext.support["android-junit"]

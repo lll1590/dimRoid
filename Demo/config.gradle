@@ -39,12 +39,12 @@ ext {
             "rxjava"                               : "io.reactivex.rxjava2:rxjava:2.2.3",
             "rxandroid"                            : "io.reactivex.rxjava2:rxandroid:2.1.0",
             //rx系列与View生命周期同步
-            "rxlifecycle"                          : "com.trello.rxlifecycle2:rxlifecycle:2.2.2",
-            "rxlifecycle-components"               : "com.trello.rxlifecycle2:rxlifecycle-components:2.2.2",
+            "rxlifecycle"                          : "com.trello.rxlifecycle3:rxlifecycle:3.1.0",
+            "rxlifecycle-components"               : "com.trello.rxlifecycle3:rxlifecycle-components:3.1.0",
             //rxbinding
-            "rxbinding"                            : "com.jakewharton.rxbinding2:rxbinding:2.1.1",
+            "rxbinding"                            : "com.jakewharton.rxbinding3:rxbinding:3.1.0",
             //rx 6.0权限请求
-            "rxpermissions"                        : "com.lovedise:permissiongen:0.0.6",
+            "rxpermissions"                        : "com.github.tbruyelle:rxpermissions:0.10.2",
             //network
             "okhttp"                               : "com.squareup.okhttp3:okhttp:3.10.0",
             "retrofit"                             : "com.squareup.retrofit2:retrofit:2.4.0",
@@ -80,6 +80,9 @@ ext {
             "rounded-imageview"                    : "com.makeramen:roundedimageview:2.2.1",
             //x5浏览器
             "tbssdk"                               : 'com.tencent.tbs.tbssdk:sdk:43697',
+            //log
+            "logging-interceptor"                  : 'com.squareup.okhttp3:logging-interceptor:3.5.0',
+            "logger"                               : 'com.orhanobut:logger:1.15',
     ]
 
 }
