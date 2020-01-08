@@ -1,2 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dim.ke.framework" />
+    package="com.dim.ke.framework" >
+    <application>
+        <meta-data android:name="design_width" android:value="750">
+        </meta-data>
+        <meta-data android:name="design_height" android:value="1334">
+        </meta-data>
+    </application>
+</manifest>

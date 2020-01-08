@@ -1,0 +1,46 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
+    defaultConfig {
+        applicationId "com.dim.ke.sample"
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    testImplementation rootProject.ext.support["junit"]
+    androidTestImplementation rootProject.ext.support["android-junit"]
+    androidTestImplementation rootProject.ext.support["android-espresso"]
+    implementation project(path: ':dim_framework')
+    if(!isWebModule.toBoolean()){
+        implementation project(path: ':dim_h5')
+    }
+    if(!isWebModule.toBoolean()) {
+        implementation project(path: ':dim_kotlin')
+    }
+    if(!isWebModule.toBoolean()) {
+        implementation project(path: ':dim_flutter_bridger')
+    }
+}

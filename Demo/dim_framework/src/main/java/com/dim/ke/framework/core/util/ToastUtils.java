@@ -7,7 +7,8 @@ import android.view.LayoutInflater;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ng.framework.R;
+import com.dim.ke.framework.R;
+
 
 public class ToastUtils {
 
@@ -29,7 +30,7 @@ public class ToastUtils {
 
     private static Toast mToast = null;
 
-    public static void showCustomToast(Context context, CharSequence msg)
+    private static void showCustomToast(Context context, CharSequence msg)
     {
         if (null != mToast) {
             mToast.cancel();

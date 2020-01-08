@@ -1,4 +1,4 @@
-include ':app', ':dim_framework', ':dim_h5', ':dim_flutter_bridger', ':dim_kotlin'
+include ':app', ':dim_framework', ':dim_h5', ':dim_flutter_bridger', ':dim_kotlin', ':sample'
 setBinding(new Binding([gradle: this]))
 evaluate(new File(
   settingsDir,

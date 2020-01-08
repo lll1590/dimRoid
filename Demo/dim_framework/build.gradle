@@ -86,6 +86,8 @@ dependencies {
     implementation rootProject.ext.dependencies["logger"]
     implementation rootProject.ext.dependencies["logging-interceptor"]
 
+    api rootProject.ext.dependencies.autoLayout
+
     testImplementation rootProject.ext.support["junit"]
     androidTestImplementation rootProject.ext.support["android-junit"]
     androidTestImplementation rootProject.ext.support["android-espresso"]

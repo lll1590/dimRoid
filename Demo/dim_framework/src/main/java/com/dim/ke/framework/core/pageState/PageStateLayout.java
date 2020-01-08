@@ -20,6 +20,8 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
+import com.dim.ke.framework.R;
+
 /**
  * Created by hupei on 2018/9/27 13:49.
  */

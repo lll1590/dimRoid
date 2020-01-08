@@ -7,6 +7,7 @@ import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -18,8 +19,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
 import androidx.core.content.ContextCompat;
-
-import com.ng.framework.R;
 
 import java.security.SecureRandom;
 import java.util.List;
@@ -125,22 +124,21 @@ public class AndroidUtils {
      * @return 名称
      */
     public static String getAppName(Context context) {
-        return context.getResources().getString(R.string.app_name);
-//        PackageManager pm = context.getPackageManager();
-//        //获取包信息
-//        try {
-//            PackageInfo packageInfo = pm.getPackageInfo(context.getPackageName(), 0);
-//            //获取应用 信息
-//            ApplicationInfo applicationInfo = packageInfo.applicationInfo;
-//            //获取albelRes
-//            int labelRes = applicationInfo.labelRes;
-//            //返回App的名称
-//            return context.getResources().getString(labelRes);
-//        } catch (PackageManager.NameNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return null;
+        PackageManager pm = context.getPackageManager();
+        //获取包信息
+        try {
+            PackageInfo packageInfo = pm.getPackageInfo(context.getPackageName(), 0);
+            //获取应用 信息
+            ApplicationInfo applicationInfo = packageInfo.applicationInfo;
+            //获取albelRes
+            int labelRes = applicationInfo.labelRes;
+            //返回App的名称
+            return context.getResources().getString(labelRes);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     /**

@@ -15,4 +15,14 @@ public interface IPageStateView {
      * 加载错误回调
      */
     void showLoadErrView();
+
+    /**
+     * 加载错误回调
+     */
+    void showLoadNetErrView();
+
+    /**
+     * 加载完毕正常回调
+     */
+    void showContentView();
 }

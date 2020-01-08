@@ -83,6 +83,8 @@ ext {
             //log
             "logging-interceptor"                  : 'com.squareup.okhttp3:logging-interceptor:3.5.0',
             "logger"                               : 'com.orhanobut:logger:1.15',
+            //autoLayout
+            "autoLayout"                           : "com.zhy:autolayout:1.4.5"
     ]
 
 }
