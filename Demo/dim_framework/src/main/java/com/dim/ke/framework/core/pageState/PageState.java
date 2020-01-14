@@ -34,13 +34,6 @@ public interface PageState {
      */
     PageState setErrorLayout(@LayoutRes int errorLayoutId);
 
-    /**
-     * 网络视图的布局 id
-     *
-     * @param errorNetLayoutId
-     * @return PageState
-     */
-    PageState setErrorNetLayout(@LayoutRes int errorNetLayoutId);
 
     /**
      * 加载视图进度ProgressBar的id
@@ -91,22 +84,6 @@ public interface PageState {
     PageState setErrorMsgViewId(@IdRes int errorMsgViewId);
 
     /**
-     * 网络错误视图ImageView的id
-     *
-     * @param errorNetImgId
-     * @return PageState
-     */
-    PageState setErrorNetImgId(@IdRes int errorNetImgId);
-
-    /**
-     * 网络错误视图文字描述TextView的id
-     *
-     * @param errorNetMsgViewId
-     * @return PageState
-     */
-    PageState setErrorNetMsgViewId(@IdRes int errorNetMsgViewId);
-
-    /**
      * 错误视图事件是否显示加载视图
      *
      * @param show
@@ -121,14 +98,6 @@ public interface PageState {
      * @return PageState
      */
     PageState setOnErrorListener(OnErrorClickListener listener);
-
-    /**
-     * 设置网络错误视图点击事件
-     *
-     * @param listener
-     * @return PageState
-     */
-    PageState setOnErrorNetListener(OnErrorNetClickListener listener);
 
     /**
      * 显示加载数据视图
@@ -151,11 +120,6 @@ public interface PageState {
     void showErrorView();
 
     /**
-     * 显示网络错误视图
-     */
-    void showErrorNetView();
-
-    /**
      * 获取空数据视图
      *
      * @param <T> View
@@ -170,14 +134,6 @@ public interface PageState {
      * @return View
      */
     <T extends View> T getErrorView();
-
-    /**
-     * 获取网络错误视图
-     *
-     * @param <T> View
-     * @return View
-     */
-    <T extends View> T getErrorNetView();
 
     /**
      * 获取加载数据文字描述控件
@@ -203,13 +159,6 @@ public interface PageState {
      */
     <T extends View> T getErrorMsgView();
 
-    /**
-     * 获取网络错误提示文字描述控件
-     *
-     * @param <T> View
-     * @return View
-     */
-    <T extends View> T getErrorNetMsgView();
 
     /**
      * 获取加载视图进度控件
@@ -234,13 +183,5 @@ public interface PageState {
      * @return View
      */
     <T extends View> T getErrorImgView();
-
-    /**
-     * 获取网络错误视图图片控件
-     *
-     * @param <T> View
-     * @return View
-     */
-    <T extends View> T getErrorNetImgView();
 
 }

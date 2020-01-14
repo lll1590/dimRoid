@@ -8,11 +8,14 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -20,12 +23,14 @@ import androidx.appcompat.widget.Toolbar;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.dim.ke.framework.R;
 import com.dim.ke.framework.core.ActivityManager;
+import com.dim.ke.framework.core.DimApp;
 import com.dim.ke.framework.core.eventbus.BaseEvent;
 import com.dim.ke.framework.core.eventbus.EventBusUtils;
 import com.dim.ke.framework.core.pageState.PageState;
 import com.dim.ke.framework.core.pageState.PageStateLayout;
 import com.dim.ke.framework.core.util.LogUtils;
 import com.dim.ke.framework.core.util.ToastUtils;
+import com.zhy.autolayout.AutoLayoutActivity;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -33,15 +38,15 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-public abstract class BaseActivity extends AppCompatActivity implements BaseView{
+public abstract class BaseActivity extends AutoLayoutActivity implements BaseView{
 
     protected static final String TAG = BaseActivity.class.getSimpleName();
 
     private Context mContext;
 
-    private ViewGroup mRootView;
-    private ViewStub mViewStubTitle;
-    private ViewStub mViewStubContent;
+    protected ViewGroup mRootView;
+    protected ViewStub mViewStubTitle;
+    protected FrameLayout mViewStubContent;
 
     protected TextView mTxtTitle;
     protected Toolbar mToolbar;
@@ -157,9 +162,24 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     }
 
-    private void initContentView(){
-        mViewStubContent.setLayoutResource(getLayoutId());
-        mViewStubContent.inflate();
+    @Override
+    public void setContentView(@LayoutRes int layoutResID) {
+        if (mViewStubContent != null) {
+            initContentView(layoutResID);
+        }
+    }
+
+    protected void initContentView(){
+
+        initContentView(getLayoutId());
+    }
+
+    private void initContentView(@LayoutRes int layoutResID) {
+        View view = LayoutInflater.from(this).inflate(layoutResID, mViewStubContent, false);
+        mViewStubContent.setId(android.R.id.content);
+        mRootView.setId(View.NO_ID);
+        mViewStubContent.removeAllViews();
+        mViewStubContent.addView(view);
     }
 
     protected void debug(String msg){
@@ -168,6 +188,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     protected void toShowToast(String msg){
         ToastUtils.showToast(mContext, msg);
+    }
+
+    public <APP extends DimApp> APP getApp(){
+        return (APP) getApplication();
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -187,11 +211,6 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     public void showLoadErrView() {
         mPageState.showErrorView();
-    }
-
-    @Override
-    public void showLoadNetErrView() {
-        mPageState.showErrorNetView();
     }
 
     @Override

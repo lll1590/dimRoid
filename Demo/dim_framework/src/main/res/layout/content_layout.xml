@@ -6,7 +6,7 @@
         android:id="@+id/view_title_sub"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    <ViewStub
+    <FrameLayout
         android:id="@+id/view_content_sub"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

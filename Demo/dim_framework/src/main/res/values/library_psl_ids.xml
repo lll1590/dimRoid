@@ -6,6 +6,4 @@
     <item name="library_psl_emptyMsg" type="id"/>
     <item name="library_psl_errorImg" type="id"/>
     <item name="library_psl_errorMsg" type="id"/>
-    <item name="library_psl_errorNetImg" type="id"/>
-    <item name="library_psl_errorNetMsg" type="id"/>
 </resources>

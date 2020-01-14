@@ -18,15 +18,14 @@ class PageStateLayoutCreater implements PageState {
 
     private Context mContext;
     private ViewGroup mRootView;
-    private View mContentView, mLoadingView, mEmptyView, mErrorView, mErrorNetView;
-    private View mLoadingProgressView, mEmptyImgView, mErrorImgView, mErrorNetImgView;
-    private View mLoadingMsgView, mEmptyMsgView, mErrorMsgView, mErrorNetMsgView;
+    private View mContentView, mLoadingView, mEmptyView, mErrorView;
+    private View mLoadingProgressView, mEmptyImgView, mErrorImgView;
+    private View mLoadingMsgView, mEmptyMsgView, mErrorMsgView;
     private OnErrorClickListener mOnErrorClickListener;
-    private OnErrorNetClickListener mOnErrorNetClickListener;
     private boolean showClickLoadView = true;
-    private int mLoadingLayout = NO_ID, mEmptyLayout = NO_ID, mErrorLayout = NO_ID, mErrorNetLayout = NO_ID;
-    private int mLoadingProgressViewId = NO_ID, mEmptyImgId = NO_ID, mErrorImgId = NO_ID, mErrorNetImgId = NO_ID;
-    private int mLoadingMsgViewId = NO_ID, mEmptyMsgViewId = NO_ID, mErrorMsgViewId = NO_ID, mErrorNetMsgViewId = NO_ID;
+    private int mLoadingLayout = NO_ID, mEmptyLayout = NO_ID, mErrorLayout = NO_ID;
+    private int mLoadingProgressViewId = NO_ID, mEmptyImgId = NO_ID, mErrorImgId = NO_ID;
+    private int mLoadingMsgViewId = NO_ID, mEmptyMsgViewId = NO_ID, mErrorMsgViewId = NO_ID;
 
     @Override
     public PageState setLoadingLayout(@LayoutRes int loadingLayoutId) {
@@ -43,12 +42,6 @@ class PageStateLayoutCreater implements PageState {
     @Override
     public PageState setErrorLayout(@LayoutRes int errorLayoutId) {
         this.mErrorLayout = errorLayoutId;
-        return this;
-    }
-
-    @Override
-    public PageState setErrorNetLayout(@LayoutRes int errorNetLayoutId) {
-        this.mErrorNetLayout = errorNetLayoutId;
         return this;
     }
 
@@ -89,18 +82,6 @@ class PageStateLayoutCreater implements PageState {
     }
 
     @Override
-    public PageState setErrorNetImgId(int errorNetImgId) {
-        this.mErrorNetImgId = errorNetImgId;
-        return this;
-    }
-
-    @Override
-    public PageState setErrorNetMsgViewId(@IdRes int errorNetMsgViewId) {
-        this.mErrorNetMsgViewId = errorNetMsgViewId;
-        return this;
-    }
-
-    @Override
     public PageState setClickShowLoadView(boolean show) {
         this.showClickLoadView = show;
         return this;
@@ -109,12 +90,6 @@ class PageStateLayoutCreater implements PageState {
     @Override
     public PageState setOnErrorListener(OnErrorClickListener listener) {
         this.mOnErrorClickListener = listener;
-        return this;
-    }
-
-    @Override
-    public PageState setOnErrorNetListener(OnErrorNetClickListener listener) {
-        this.mOnErrorNetClickListener = listener;
         return this;
     }
 
@@ -149,14 +124,6 @@ class PageStateLayoutCreater implements PageState {
     }
 
     @Override
-    public void showErrorNetView() {
-        goneAllView();
-        if (this.mErrorNetView != null) {
-            this.mErrorNetView.setVisibility(View.VISIBLE);
-        }
-    }
-
-    @Override
     public View getEmptyView() {
         return this.mEmptyView;
     }
@@ -164,11 +131,6 @@ class PageStateLayoutCreater implements PageState {
     @Override
     public View getErrorView() {
         return this.mErrorView;
-    }
-
-    @Override
-    public View getErrorNetView() {
-        return this.mErrorNetView;
     }
 
     @Override
@@ -187,11 +149,6 @@ class PageStateLayoutCreater implements PageState {
     }
 
     @Override
-    public View getErrorNetMsgView() {
-        return this.mErrorNetMsgView;
-    }
-
-    @Override
     public View getLoadingProgressView() {
         return this.mLoadingProgressView;
     }
@@ -206,17 +163,11 @@ class PageStateLayoutCreater implements PageState {
         return this.mErrorImgView;
     }
 
-    @Override
-    public View getErrorNetImgView() {
-        return this.mErrorNetImgView;
-    }
-
     private void goneAllView() {
         if (mLoadingView != null) mLoadingView.setVisibility(View.GONE);
         if (mContentView != null) mContentView.setVisibility(View.GONE);
         if (mEmptyView != null) mEmptyView.setVisibility(View.GONE);
         if (mErrorView != null) mErrorView.setVisibility(View.GONE);
-        if (mErrorNetView != null) mErrorNetView.setVisibility(View.GONE);
     }
 
     void setRootView(View rootView) {
@@ -237,14 +188,12 @@ class PageStateLayoutCreater implements PageState {
         this.mLoadingView = inflate(mLoadingLayout);
         this.mEmptyView = inflate(mEmptyLayout);
         this.mErrorView = inflate(mErrorLayout);
-        this.mErrorNetView = inflate(mErrorNetLayout);
 
         final LayoutParams layoutParams = new LayoutParams(LayoutParams.MATCH_PARENT
                 , LayoutParams.MATCH_PARENT);
         this.mRootView.addView(mLoadingView, layoutParams);
         this.mRootView.addView(mEmptyView, layoutParams);
         this.mRootView.addView(mErrorView, layoutParams);
-        this.mRootView.addView(mErrorNetView, layoutParams);
 
         if (this.mLoadingProgressViewId != NO_ID) {
             this.mLoadingProgressView = mLoadingView.findViewById(mLoadingProgressViewId);
@@ -279,25 +228,6 @@ class PageStateLayoutCreater implements PageState {
             this.mErrorMsgView = mErrorView.findViewById(mErrorMsgViewId);
         }
 
-        if (this.mOnErrorNetClickListener != null) {
-            this.mErrorNetView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (showClickLoadView) {
-                        showLoadingView();
-                    } else {
-                        goneAllView();
-                    }
-                    mOnErrorNetClickListener.onErrorNetClick();
-                }
-            });
-        }
-        if (this.mErrorNetImgId != NO_ID) {
-            this.mErrorNetImgView = mErrorNetView.findViewById(mErrorNetImgId);
-        }
-        if (this.mErrorNetMsgViewId != NO_ID) {
-            this.mErrorNetMsgView = mErrorNetView.findViewById(mErrorNetMsgViewId);
-        }
         goneAllView();
     }
 
@@ -316,10 +246,6 @@ class PageStateLayoutCreater implements PageState {
         if (this.mErrorLayout == NO_ID) {
             throw new IllegalArgumentException("mErrorLayout cannot be null. Please use use " +
                     "psl_loadingLayout or extends PageStateDelegate#getErrorLayout");
-        }
-        if (this.mErrorNetLayout == NO_ID) {
-            throw new IllegalArgumentException("mErrorNetLayout cannot be null. Please use use " +
-                    "psl_loadingLayout or extends PageStateDelegate#getErrorNetLayout");
         }
     }
 

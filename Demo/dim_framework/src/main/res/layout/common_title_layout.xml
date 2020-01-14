@@ -12,8 +12,9 @@
         <TextView
             android:id="@+id/toolbar_left_1"
             style="@style/TitleTxtStyle"
+
             android:drawableLeft="@drawable/icon_common_back"
-            android:layout_marginLeft="20px"
+            android:layout_marginLeft="10px"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -21,7 +22,7 @@
         <TextView
             android:id="@+id/toolbar_left_2"
             style="@style/TitleTxtStyle"
-            android:layout_marginLeft="20px"
+            android:layout_marginLeft="10px"
             app:layout_constraintLeft_toRightOf="@+id/toolbar_left_1"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -39,7 +40,7 @@
         <TextView
             android:id="@+id/toolbar_right_2"
             style="@style/TitleTxtStyle"
-            android:layout_marginRight="20px"
+            android:layout_marginRight="10px"
             app:layout_constraintRight_toLeftOf="@+id/toolbar_right_1"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -47,7 +48,7 @@
         <TextView
             android:id="@+id/toolbar_right_1"
             style="@style/TitleTxtStyle"
-            android:layout_marginRight="20px"
+            android:layout_marginRight="10px"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

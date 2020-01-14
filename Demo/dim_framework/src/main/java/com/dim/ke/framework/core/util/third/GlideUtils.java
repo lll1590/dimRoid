@@ -46,9 +46,6 @@ public class GlideUtils {
     }
 
     public static void displayImage(final String uri, ImageView imageView, int resId, RequestOptions displayOption) {
-//        if(TextUtils.isEmpty(uri)){
-//            return;
-//        }
         if (displayOption == null) {
             displayOption = RequestOptions.diskCacheStrategyOf(DiskCacheStrategy.ALL)
                     .override(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL)

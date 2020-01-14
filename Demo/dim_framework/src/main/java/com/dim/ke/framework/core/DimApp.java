@@ -22,7 +22,7 @@ public class DimApp extends Application {
         // 初始化Looger工具
         LogUtils.init(Constant.DEBUG);
         //auttLayout初始化
-        AutoLayoutConifg.getInstance().useDeviceSize();
+        AutoLayoutConifg.getInstance().useDeviceSize().init(this);
     }
 
 

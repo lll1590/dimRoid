@@ -53,8 +53,6 @@ public class PageStateLayout extends FrameLayout implements PageState {
                 , R.layout.library_psl_empty);
         int errorLayout = ta.getResourceId(R.styleable.PageStateLayout_psl_errorLayout
                 , R.layout.library_psl_error);
-        int errorNetLayout = ta.getResourceId(R.styleable.PageStateLayout_psl_errorNetLayout
-                , R.layout.library_psl_error_net);
 
         int loadingProgressId = ta.getResourceId(R.styleable.PageStateLayout_psl_loadingProgressViewId
                 , R.id.library_psl_loadingProgress);
@@ -62,12 +60,9 @@ public class PageStateLayout extends FrameLayout implements PageState {
                 , R.id.library_psl_emptyImg);
         int errorImgId = ta.getResourceId(R.styleable.PageStateLayout_psl_errorImgId
                 , R.id.library_psl_errorImg);
-        int errorNetImgId = ta.getResourceId(R.styleable.PageStateLayout_psl_errorNetImgId
-                , R.id.library_psl_errorNetImg);
 
         Drawable emptyImgDrawable = ta.getDrawable(R.styleable.PageStateLayout_psl_emptyImgSrc);
         Drawable errorImgDrawable = ta.getDrawable(R.styleable.PageStateLayout_psl_errorImgSrc);
-        Drawable errorNetImgDrawable = ta.getDrawable(R.styleable.PageStateLayout_psl_errorNetImgSrc);
 
         int loadingMsgViewId = ta.getResourceId(R.styleable.PageStateLayout_psl_loadingMsgViewId
                 , R.id.library_psl_loadingMsg);
@@ -75,13 +70,10 @@ public class PageStateLayout extends FrameLayout implements PageState {
                 , R.id.library_psl_emptyMsg);
         int errorMsgViewId = ta.getResourceId(R.styleable.PageStateLayout_psl_errorMsgViewId
                 , R.id.library_psl_errorMsg);
-        int errorNetMsgViewId = ta.getResourceId(R.styleable.PageStateLayout_psl_errorNetMsgViewId
-                , R.id.library_psl_errorNetMsg);
 
         CharSequence loadingMsg = ta.getText(R.styleable.PageStateLayout_psl_loadingMsg);
         CharSequence emptyMsg = ta.getText(R.styleable.PageStateLayout_psl_emptyMsg);
         CharSequence errorMsg = ta.getText(R.styleable.PageStateLayout_psl_errorMsg);
-        CharSequence errorNetMsg = ta.getText(R.styleable.PageStateLayout_psl_errorNetMsg);
 
         mContentLayoutId = ta.getResourceId(R.styleable.PageStateLayout_psl_contentLayoutId, NO_ID);
         boolean clickShowLoadView = ta.getBoolean(R.styleable.PageStateLayout_psl_clickShowLoadView
@@ -93,17 +85,14 @@ public class PageStateLayout extends FrameLayout implements PageState {
             setLoadingLayout(loadingLayout);
             setEmptyLayout(emptyLayout);
             setErrorLayout(errorLayout);
-            setErrorNetLayout(errorNetLayout);
 
             setLoadingProgressViewId(loadingProgressId);
             setEmptyImgId(emptyImgId);
             setErrorImgId(errorImgId);
-            setErrorNetImgId(errorNetImgId);
 
             setLoadingMsgViewId(loadingMsgViewId);
             setEmptyMsgViewId(emptyMsgViewId);
             setErrorMsgViewId(errorMsgViewId);
-            setErrorNetMsgViewId(errorNetMsgViewId);
 
             mPageStateCreater.create();
 
@@ -114,10 +103,6 @@ public class PageStateLayout extends FrameLayout implements PageState {
             if (errorImgDrawable != null && getErrorImgView() != null
                     && getErrorImgView() instanceof ImageView) {
                 ((ImageView) getErrorImgView()).setImageDrawable(errorImgDrawable);
-            }
-            if (errorNetImgDrawable != null && getErrorNetImgView() != null
-                    && getErrorNetImgView() instanceof ImageView) {
-                ((ImageView) getErrorNetImgView()).setImageDrawable(errorNetImgDrawable);
             }
 
             if (!TextUtils.isEmpty(loadingMsg) && getLoadingMsgView() != null
@@ -131,10 +116,6 @@ public class PageStateLayout extends FrameLayout implements PageState {
             if (!TextUtils.isEmpty(errorMsg) && getErrorMsgView() != null
                     && getErrorMsgView() instanceof TextView) {
                 ((TextView) getErrorMsgView()).setText(errorMsg);
-            }
-            if (!TextUtils.isEmpty(errorNetMsg) && getErrorNetMsgView() != null
-                    && getErrorNetMsgView() instanceof TextView) {
-                ((TextView) getErrorNetMsgView()).setText(errorNetMsg);
             }
 
             setClickShowLoadView(clickShowLoadView);
@@ -157,10 +138,6 @@ public class PageStateLayout extends FrameLayout implements PageState {
         return mPageStateCreater.setErrorLayout(errorLayoutId);
     }
 
-    @Override
-    public PageState setErrorNetLayout(@LayoutRes int errorNetLayoutId) {
-        return mPageStateCreater.setErrorNetLayout(errorNetLayoutId);
-    }
 
     @Override
     public PageState setLoadingProgressViewId(int loadingProgressViewId) {
@@ -193,16 +170,6 @@ public class PageStateLayout extends FrameLayout implements PageState {
     }
 
     @Override
-    public PageState setErrorNetImgId(int errorNetImgId) {
-        return mPageStateCreater.setErrorNetImgId(errorNetImgId);
-    }
-
-    @Override
-    public PageState setErrorNetMsgViewId(@IdRes int errorNetMsgViewId) {
-        return mPageStateCreater.setErrorNetMsgViewId(errorNetMsgViewId);
-    }
-
-    @Override
     public PageState setClickShowLoadView(boolean show) {
         return mPageStateCreater.setClickShowLoadView(show);
     }
@@ -210,11 +177,6 @@ public class PageStateLayout extends FrameLayout implements PageState {
     @Override
     public PageState setOnErrorListener(OnErrorClickListener listener) {
         return mPageStateCreater.setOnErrorListener(listener);
-    }
-
-    @Override
-    public PageState setOnErrorNetListener(OnErrorNetClickListener listener) {
-        return mPageStateCreater.setOnErrorNetListener(listener);
     }
 
     @Override
@@ -238,11 +200,6 @@ public class PageStateLayout extends FrameLayout implements PageState {
     }
 
     @Override
-    public void showErrorNetView() {
-        mPageStateCreater.showErrorNetView();
-    }
-
-    @Override
     public <T extends View> T getEmptyView() {
         return (T) mPageStateCreater.getEmptyView();
     }
@@ -250,11 +207,6 @@ public class PageStateLayout extends FrameLayout implements PageState {
     @Override
     public <T extends View> T getErrorView() {
         return (T) mPageStateCreater.getErrorView();
-    }
-
-    @Override
-    public <T extends View> T getErrorNetView() {
-        return (T) mPageStateCreater.getErrorNetView();
     }
 
     @Override
@@ -273,11 +225,6 @@ public class PageStateLayout extends FrameLayout implements PageState {
     }
 
     @Override
-    public <T extends View> T getErrorNetMsgView() {
-        return (T) mPageStateCreater.getErrorNetMsgView();
-    }
-
-    @Override
     public <T extends View> T getLoadingProgressView() {
         return (T) mPageStateCreater.getLoadingProgressView();
     }
@@ -290,11 +237,6 @@ public class PageStateLayout extends FrameLayout implements PageState {
     @Override
     public <T extends View> T getErrorImgView() {
         return (T) mPageStateCreater.getErrorImgView();
-    }
-
-    @Override
-    public <T extends View> T getErrorNetImgView() {
-        return (T) mPageStateCreater.getErrorNetImgView();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)

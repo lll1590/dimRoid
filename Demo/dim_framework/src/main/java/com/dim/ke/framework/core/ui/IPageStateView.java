@@ -16,10 +16,6 @@ public interface IPageStateView {
      */
     void showLoadErrView();
 
-    /**
-     * 加载错误回调
-     */
-    void showLoadNetErrView();
 
     /**
      * 加载完毕正常回调
