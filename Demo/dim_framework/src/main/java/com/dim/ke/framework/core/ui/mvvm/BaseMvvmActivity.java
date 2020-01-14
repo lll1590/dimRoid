@@ -88,8 +88,8 @@ public abstract class BaseMvvmActivity<V extends ViewDataBinding, VM extends Bas
         viewModelId = onBindVariableId();
         mViewModel = createViewModel();
         if(mDataBinding != null){
-            mDataBinding.setVariable(viewModelId, mViewModel);
-            mDataBinding.setLifecycleOwner(this);
+            mDataBinding.setVariable(viewModelId, mViewModel);//绑定ViewModel
+            mDataBinding.setLifecycleOwner(this);//双向绑定
         }
         getLifecycle().addObserver(mViewModel);
     }

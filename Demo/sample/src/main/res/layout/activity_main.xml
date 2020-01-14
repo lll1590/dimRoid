@@ -31,6 +31,10 @@
             android:layout_height="wrap_content"
             android:text="binding"
             android:onClick="@{mainActivity::bindClick}"/>
-
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="testHttp"
+            android:onClick="@{mainActivity::testApi}"/>
     </LinearLayout>
 </layout>

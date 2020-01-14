@@ -5,12 +5,18 @@ import android.view.View;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.dim.ke.framework.core.http.RetrofitManager;
 import com.dim.ke.framework.core.ui.mvvm.BaseMvvmActivity;
 import com.dim.ke.framework.core.util.LogUtils;
 import com.dim.ke.sample.BR;
 import com.dim.ke.sample.R;
 import com.dim.ke.sample.SampleViewModelFactory;
 import com.dim.ke.sample.databinding.ActivityMainBinding;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity extends BaseMvvmActivity<ActivityMainBinding, MainViewModel> {
 
@@ -56,5 +62,32 @@ public class MainActivity extends BaseMvvmActivity<ActivityMainBinding, MainView
         LogUtils.d("111114351111");
 //        mDataBinding.edit.setText("12345");
         mViewModel.setMain("12345");
+    }
+
+    public void testApi(View view){
+        Observable<String> testObservable = RetrofitManager.getInstance().getWanAndroidService().wsArticle();
+        testObservable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new io.reactivex.Observer<String>() {
+            @Override
+            public void onSubscribe(Disposable d) {
+                LogUtils.d("onSubscribe...");
+            }
+
+            @Override
+            public void onNext(String s) {
+                LogUtils.d("onNext:" + s);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                LogUtils.d("onError:" + e.toString());
+            }
+
+            @Override
+            public void onComplete() {
+                LogUtils.d("onComplete...");
+            }
+        });
     }
 }

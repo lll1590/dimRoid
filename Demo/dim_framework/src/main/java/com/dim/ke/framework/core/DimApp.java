@@ -3,6 +3,7 @@ package com.dim.ke.framework.core;
 import android.app.Application;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.dim.ke.framework.core.http.RetrofitManager;
 import com.dim.ke.framework.core.util.LogUtils;
 import com.zhy.autolayout.config.AutoLayoutConifg;
 
@@ -18,6 +19,7 @@ public class DimApp extends Application {
         super.onCreate();
         mInstance = this;
 
+        RetrofitManager.init(this);
         initARouter();
         // 初始化Looger工具
         LogUtils.init(Constant.DEBUG);
