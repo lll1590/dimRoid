@@ -1,8 +1,12 @@
 package com.dim.ke.sample.main;
 
+import android.view.View;
+
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.dim.ke.framework.core.ui.mvvm.BaseMvvmActivity;
+import com.dim.ke.framework.core.util.LogUtils;
 import com.dim.ke.sample.BR;
 import com.dim.ke.sample.R;
 import com.dim.ke.sample.SampleViewModelFactory;
@@ -24,6 +28,13 @@ public class MainActivity extends BaseMvvmActivity<ActivityMainBinding, MainView
     @Override
     public void initViewObservable() {
 //        mDataBinding.setMainModel(mViewModel);
+        mDataBinding.setVariable(BR.mainActivity, this);
+        mViewModel.main.observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                mDataBinding.text.setText(s);
+            }
+        });
     }
 
     @Override
@@ -41,4 +52,9 @@ public class MainActivity extends BaseMvvmActivity<ActivityMainBinding, MainView
         return "Sample";
     }
 
+    public void bindClick(View view){
+        LogUtils.d("111114351111");
+//        mDataBinding.edit.setText("12345");
+        mViewModel.setMain("12345");
+    }
 }

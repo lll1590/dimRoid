@@ -5,6 +5,9 @@
 
     <data>
         <variable
+            name="mainActivity"
+            type="com.dim.ke.sample.main.MainActivity" />
+        <variable
             name="mainModel"
             type="com.dim.ke.sample.main.MainViewModel"/>
     </data>
@@ -14,19 +17,20 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
         <TextView
+            android:id="@+id/text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#333333"
-            android:text="@{mainModel.text}"/>
+            android:textColor="#333333"/>
         <EditText
+            android:id="@+id/edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@={mainModel.text}"/>
+            android:text="@={mainModel.main}"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="双向绑定"
-            android:onClick="@{v -> mainModel.bindClick()}"/>
+            android:text="binding"
+            android:onClick="@{mainActivity::bindClick}"/>
 
     </LinearLayout>
 </layout>

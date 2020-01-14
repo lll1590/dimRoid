@@ -89,6 +89,7 @@ public abstract class BaseMvvmActivity<V extends ViewDataBinding, VM extends Bas
         mViewModel = createViewModel();
         if(mDataBinding != null){
             mDataBinding.setVariable(viewModelId, mViewModel);
+            mDataBinding.setLifecycleOwner(this);
         }
         getLifecycle().addObserver(mViewModel);
     }
