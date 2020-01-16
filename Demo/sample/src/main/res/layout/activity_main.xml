@@ -36,5 +36,10 @@
             android:layout_height="wrap_content"
             android:text="testHttp"
             android:onClick="@{mainActivity::testApi}"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="testDagger"
+            android:onClick="@{mainActivity::testDagger}"/>
     </LinearLayout>
 </layout>

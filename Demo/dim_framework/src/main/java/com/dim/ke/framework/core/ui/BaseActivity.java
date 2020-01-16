@@ -8,6 +8,7 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +17,6 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.CallSuper;
-import androidx.annotation.CheckResult;
-import androidx.annotation.ContentView;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,12 +32,10 @@ import com.dim.ke.framework.core.pageState.PageState;
 import com.dim.ke.framework.core.pageState.PageStateLayout;
 import com.dim.ke.framework.core.util.LogUtils;
 import com.dim.ke.framework.core.util.ToastUtils;
-import com.trello.rxlifecycle3.LifecycleProvider;
-import com.trello.rxlifecycle3.LifecycleTransformer;
-import com.trello.rxlifecycle3.RxLifecycle;
-import com.trello.rxlifecycle3.android.ActivityEvent;
-import com.trello.rxlifecycle3.android.RxLifecycleAndroid;
-import com.zhy.autolayout.AutoLayoutActivity;
+import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
+import com.zhy.autolayout.AutoFrameLayout;
+import com.zhy.autolayout.AutoLinearLayout;
+import com.zhy.autolayout.AutoRelativeLayout;
 
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
@@ -46,13 +43,14 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-import io.reactivex.Observable;
-import io.reactivex.subjects.BehaviorSubject;
+public abstract class BaseActivity extends RxAppCompatActivity implements BaseView{
 
-public abstract class BaseActivity extends AutoLayoutActivity implements BaseView, LifecycleProvider<ActivityEvent> {
+    //autoLayout
+    private static final String LAYOUT_LINEARLAYOUT = "LinearLayout";
+    private static final String LAYOUT_FRAMELAYOUT = "FrameLayout";
+    private static final String LAYOUT_RELATIVELAYOUT = "RelativeLayout";
 
     protected static final String TAG = BaseActivity.class.getSimpleName();
-    private final BehaviorSubject<ActivityEvent> lifecycleSubject = BehaviorSubject.create();
 
     private Context mContext;
 
@@ -68,6 +66,30 @@ public abstract class BaseActivity extends AutoLayoutActivity implements BaseVie
     protected TextView mRightTxt2;
 
     protected PageState mPageState;
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull String name, @NonNull Context context, @NonNull AttributeSet attrs) {
+        View view = null;
+        if (name.equals(LAYOUT_FRAMELAYOUT))
+        {
+            view = new AutoFrameLayout(context, attrs);
+        }
+
+        if (name.equals(LAYOUT_LINEARLAYOUT))
+        {
+            view = new AutoLinearLayout(context, attrs);
+        }
+
+        if (name.equals(LAYOUT_RELATIVELAYOUT))
+        {
+            view = new AutoRelativeLayout(context, attrs);
+        }
+
+        if (view != null) return view;
+
+        return super.onCreateView(name, context, attrs);
+    }
 
     @Override
     public Context getContext() {
@@ -94,7 +116,6 @@ public abstract class BaseActivity extends AutoLayoutActivity implements BaseVie
             boolean result = fixOrientation();
             LogUtils.i("onCreate fixOrientation when Oreo, result = " + result);
         }
-        this.lifecycleSubject.onNext(ActivityEvent.CREATE);
         beforeOnCreate();
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.content_layout);
@@ -119,24 +140,20 @@ public abstract class BaseActivity extends AutoLayoutActivity implements BaseVie
     @CallSuper
     protected void onStart() {
         super.onStart();
-        this.lifecycleSubject.onNext(ActivityEvent.START);
     }
 
     @CallSuper
     protected void onResume() {
         super.onResume();
-        this.lifecycleSubject.onNext(ActivityEvent.RESUME);
     }
 
     @CallSuper
     protected void onPause() {
-        this.lifecycleSubject.onNext(ActivityEvent.PAUSE);
         super.onPause();
     }
 
     @CallSuper
     protected void onStop() {
-        this.lifecycleSubject.onNext(ActivityEvent.STOP);
         super.onStop();
     }
 
@@ -144,7 +161,6 @@ public abstract class BaseActivity extends AutoLayoutActivity implements BaseVie
     @CallSuper
     @Override
     protected void onDestroy() {
-        this.lifecycleSubject.onNext(ActivityEvent.DESTROY);
         super.onDestroy();
         EventBusUtils.unregister(this);
         ActivityManager.newInstance().removeActivity(this);
@@ -328,23 +344,5 @@ public abstract class BaseActivity extends AutoLayoutActivity implements BaseVie
 
         super.onConfigurationChanged(newConfig);
 
-    }
-
-    @NonNull
-    @CheckResult
-    public final Observable<ActivityEvent> lifecycle() {
-        return this.lifecycleSubject.hide();
-    }
-
-    @NonNull
-    @CheckResult
-    public final <T> LifecycleTransformer<T> bindUntilEvent(@NonNull ActivityEvent event) {
-        return RxLifecycle.bindUntilEvent(this.lifecycleSubject, event);
-    }
-
-    @NonNull
-    @CheckResult
-    public final <T> LifecycleTransformer<T> bindToLifecycle() {
-        return RxLifecycleAndroid.bindActivity(this.lifecycleSubject);
     }
 }

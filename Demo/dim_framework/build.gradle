@@ -75,11 +75,12 @@ dependencies {
     implementation rootProject.ext.dependencies["adapter-rxjava"]
 
     //rx管理View的生命周期
-    implementation rootProject.ext.dependencies["rxlifecycle"]
-    implementation rootProject.ext.dependencies["rxlifecycle-components"]
-    implementation rootProject.ext.dependencies["rxlifecycle-android"]
-    implementation rootProject.ext.dependencies["rxlifecycle-android-lifecycle"]
+    api rootProject.ext.dependencies["rxlifecycle"]
+    api rootProject.ext.dependencies["rxlifecycle-components"]
+    api rootProject.ext.dependencies["rxlifecycle-android"]
+    api rootProject.ext.dependencies["rxlifecycle-android-lifecycle"]
 
+    //dagger2
     api rootProject.ext.dependencies.dagger
     annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
 
@@ -87,7 +88,7 @@ dependencies {
 //    api rootProject.ext.dependencies.MultiImageSelector
     implementation rootProject.ext.dependencies["logger"]
     implementation rootProject.ext.dependencies["logging-interceptor"]
-
+    //autoLayout
     api rootProject.ext.dependencies.autoLayout
 
     testImplementation rootProject.ext.support["junit"]

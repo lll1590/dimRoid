@@ -4,6 +4,12 @@ android {
         if (isFlutterModule.toBoolean()) {
             applicationId "com.dim.ke.flutterbridger"
         }
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 }
 dependencies {

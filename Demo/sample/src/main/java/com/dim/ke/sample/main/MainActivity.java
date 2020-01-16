@@ -5,10 +5,10 @@ import android.view.View;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.dim.ke.framework.core.http.RetrofitManager;
 import com.dim.ke.framework.core.ui.mvvm.BaseMvvmActivity;
 import com.dim.ke.framework.core.util.LogUtils;
-import com.dim.ke.sample.BR;
 import com.dim.ke.sample.R;
 import com.dim.ke.sample.SampleViewModelFactory;
 import com.dim.ke.sample.databinding.ActivityMainBinding;
@@ -28,13 +28,13 @@ public class MainActivity extends BaseMvvmActivity<ActivityMainBinding, MainView
 
     @Override
     public ViewModelProvider.Factory onBindViewModelFactory() {
-        return SampleViewModelFactory.getInstance(getApplication());
+        return SampleViewModelFactory.getInstance(getApp());
     }
 
     @Override
     public void initViewObservable() {
 //        mDataBinding.setMainModel(mViewModel);
-        mDataBinding.setVariable(BR.mainActivity, this);
+        mDataBinding.setVariable(com.dim.ke.sample.BR.mainActivity, this);
         mViewModel.main.observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
@@ -45,7 +45,7 @@ public class MainActivity extends BaseMvvmActivity<ActivityMainBinding, MainView
 
     @Override
     public int onBindVariableId() {
-        return BR.mainModel;
+        return com.dim.ke.sample.BR.mainModel;
     }
 
     @Override
@@ -89,5 +89,9 @@ public class MainActivity extends BaseMvvmActivity<ActivityMainBinding, MainView
                 LogUtils.d("onComplete...");
             }
         });
+    }
+
+    public void testDagger(View view){
+        ARouter.getInstance().build("/dagger/demo").navigation();
     }
 }

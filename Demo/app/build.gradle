@@ -10,6 +10,12 @@ android {
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
     buildTypes {
         debug {
@@ -38,6 +44,8 @@ dependencies {
     androidTestImplementation rootProject.ext.support["android-junit"]
     androidTestImplementation rootProject.ext.support["android-espresso"]
     implementation project(path: ':dim_framework')
+    annotationProcessor rootProject.ext.dependencies["arouter-compiler"]
+    annotationProcessor rootProject.ext.dependencies["dagger-compiler"]
     if(!isWebModule.toBoolean()){
         implementation project(path: ':dim_h5')
     }

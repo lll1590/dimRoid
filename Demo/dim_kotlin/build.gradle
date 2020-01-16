@@ -6,6 +6,12 @@ android {
         if (isKotlinModule.toBoolean()) {
             applicationId "com.dim.ke.kotlin"
         }
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 }
 

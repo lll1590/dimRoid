@@ -4,6 +4,12 @@ android {
         if (isWebModule.toBoolean()) {
             applicationId "com.dim.ke.web"
         }
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
     }
 }
 dependencies {
