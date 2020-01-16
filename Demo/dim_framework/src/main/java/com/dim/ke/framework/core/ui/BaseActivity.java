@@ -15,9 +15,12 @@ import android.view.ViewStub;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import androidx.annotation.CallSuper;
+import androidx.annotation.CheckResult;
+import androidx.annotation.ContentView;
 import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -30,6 +33,11 @@ import com.dim.ke.framework.core.pageState.PageState;
 import com.dim.ke.framework.core.pageState.PageStateLayout;
 import com.dim.ke.framework.core.util.LogUtils;
 import com.dim.ke.framework.core.util.ToastUtils;
+import com.trello.rxlifecycle3.LifecycleProvider;
+import com.trello.rxlifecycle3.LifecycleTransformer;
+import com.trello.rxlifecycle3.RxLifecycle;
+import com.trello.rxlifecycle3.android.ActivityEvent;
+import com.trello.rxlifecycle3.android.RxLifecycleAndroid;
 import com.zhy.autolayout.AutoLayoutActivity;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -38,9 +46,13 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-public abstract class BaseActivity extends AutoLayoutActivity implements BaseView{
+import io.reactivex.Observable;
+import io.reactivex.subjects.BehaviorSubject;
+
+public abstract class BaseActivity extends AutoLayoutActivity implements BaseView, LifecycleProvider<ActivityEvent> {
 
     protected static final String TAG = BaseActivity.class.getSimpleName();
+    private final BehaviorSubject<ActivityEvent> lifecycleSubject = BehaviorSubject.create();
 
     private Context mContext;
 
@@ -75,12 +87,14 @@ public abstract class BaseActivity extends AutoLayoutActivity implements BaseVie
         return ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
     }
 
+    @CallSuper
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.O && isTranslucentOrFloating()) {
             boolean result = fixOrientation();
             LogUtils.i("onCreate fixOrientation when Oreo, result = " + result);
         }
+        this.lifecycleSubject.onNext(ActivityEvent.CREATE);
         beforeOnCreate();
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.content_layout);
@@ -99,10 +113,38 @@ public abstract class BaseActivity extends AutoLayoutActivity implements BaseVie
         initListener();
         initData();
         EventBusUtils.register(this);
+
     }
 
+    @CallSuper
+    protected void onStart() {
+        super.onStart();
+        this.lifecycleSubject.onNext(ActivityEvent.START);
+    }
+
+    @CallSuper
+    protected void onResume() {
+        super.onResume();
+        this.lifecycleSubject.onNext(ActivityEvent.RESUME);
+    }
+
+    @CallSuper
+    protected void onPause() {
+        this.lifecycleSubject.onNext(ActivityEvent.PAUSE);
+        super.onPause();
+    }
+
+    @CallSuper
+    protected void onStop() {
+        this.lifecycleSubject.onNext(ActivityEvent.STOP);
+        super.onStop();
+    }
+
+
+    @CallSuper
     @Override
     protected void onDestroy() {
+        this.lifecycleSubject.onNext(ActivityEvent.DESTROY);
         super.onDestroy();
         EventBusUtils.unregister(this);
         ActivityManager.newInstance().removeActivity(this);
@@ -286,5 +328,23 @@ public abstract class BaseActivity extends AutoLayoutActivity implements BaseVie
 
         super.onConfigurationChanged(newConfig);
 
+    }
+
+    @NonNull
+    @CheckResult
+    public final Observable<ActivityEvent> lifecycle() {
+        return this.lifecycleSubject.hide();
+    }
+
+    @NonNull
+    @CheckResult
+    public final <T> LifecycleTransformer<T> bindUntilEvent(@NonNull ActivityEvent event) {
+        return RxLifecycle.bindUntilEvent(this.lifecycleSubject, event);
+    }
+
+    @NonNull
+    @CheckResult
+    public final <T> LifecycleTransformer<T> bindToLifecycle() {
+        return RxLifecycleAndroid.bindActivity(this.lifecycleSubject);
     }
 }

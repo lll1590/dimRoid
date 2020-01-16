@@ -75,8 +75,10 @@ dependencies {
     implementation rootProject.ext.dependencies["adapter-rxjava"]
 
     //rx管理View的生命周期
-    api rootProject.ext.dependencies.rxlifecycle-components
-    implementation rootProject.ext.dependencies.rxlifecycle
+    implementation rootProject.ext.dependencies["rxlifecycle"]
+    implementation rootProject.ext.dependencies["rxlifecycle-components"]
+    implementation rootProject.ext.dependencies["rxlifecycle-android"]
+    implementation rootProject.ext.dependencies["rxlifecycle-android-lifecycle"]
 
     api rootProject.ext.dependencies.dagger
     annotationProcessor rootProject.ext.dependencies["dagger-compiler"]

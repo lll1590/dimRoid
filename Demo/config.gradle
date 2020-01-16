@@ -17,6 +17,7 @@ ext {
             "junit-version"  : "4.12",
             "android-junit-version" : "1.1.0",
             "android-espresso-version" : "3.1.1",
+            "rxlifecycler-version" : "3.1.0"
     ]
     //support配置
     support = [
@@ -39,8 +40,10 @@ ext {
             "rxjava"                               : "io.reactivex.rxjava2:rxjava:2.2.3",
             "rxandroid"                            : "io.reactivex.rxjava2:rxandroid:2.1.0",
             //rx系列与View生命周期同步
-            "rxlifecycle"                          : "com.trello.rxlifecycle3:rxlifecycle:3.1.0",
-            "rxlifecycle-components"               : "com.trello.rxlifecycle3:rxlifecycle-components:3.1.0",
+            "rxlifecycle"                          : "com.trello.rxlifecycle3:rxlifecycle:${versions["rxlifecycler-version"]}",
+            "rxlifecycle-components"               : "com.trello.rxlifecycle3:rxlifecycle-components:${versions["rxlifecycler-version"]}",
+            "rxlifecycle-android"                  : "com.trello.rxlifecycle3:rxlifecycle-android:${versions["rxlifecycler-version"]}",
+            "rxlifecycle-android-lifecycle"        : "com.trello.rxlifecycle3:rxlifecycle-android-lifecycle:${versions["rxlifecycler-version"]}",
             //rxbinding
             "rxbinding"                            : "com.jakewharton.rxbinding3:rxbinding:3.1.0",
             //rx 6.0权限请求
@@ -84,7 +87,7 @@ ext {
             "logging-interceptor"                  : 'com.squareup.okhttp3:logging-interceptor:3.5.0',
             "logger"                               : 'com.orhanobut:logger:1.15',
             //autoLayout
-            "autoLayout"                           : "com.zhy:autolayout:1.4.5"
+            "autoLayout"                           : "com.zhy:autolayout:1.4.5",
     ]
 
 }
