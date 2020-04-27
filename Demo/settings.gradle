@@ -8,3 +8,4 @@ rootProject.name='Demo'
 
 include ':dim_flutter'
 project(':dim_flutter').projectDir = new File('../dim_flutter')
+include ':dim_screen_match'

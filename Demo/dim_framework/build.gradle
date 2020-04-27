@@ -94,4 +94,5 @@ dependencies {
     testImplementation rootProject.ext.support["junit"]
     androidTestImplementation rootProject.ext.support["android-junit"]
     androidTestImplementation rootProject.ext.support["android-espresso"]
+    api project(path: ':dim_screen_match')
 }
