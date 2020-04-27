@@ -1,5 +1,8 @@
 package com.dim.ke.sample.dagger.app;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+
 import com.dim.ke.sample.SampleApp;
 
 import dagger.Module;
@@ -16,5 +19,10 @@ public class AppModule {
     @Provides
     public SampleApp getApp(){
         return app;
+    }
+
+    @Provides
+    public SharedPreferences getSP(){
+        return app.getSharedPreferences("dim_sp", Context.MODE_PRIVATE);
     }
 }

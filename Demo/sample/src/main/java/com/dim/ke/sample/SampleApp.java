@@ -6,8 +6,6 @@ import com.dim.ke.sample.dagger.app.AppModule;
 import com.dim.ke.sample.dagger.app.ComponentHolder;
 import com.dim.ke.sample.dagger.app.DaggerAppComponent;
 
-import javax.inject.Inject;
-
 public class SampleApp extends DimApp {
 
 
