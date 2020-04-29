@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColorPrimary">@color/textColorPrimary</item>
         <item name="toolbarStyle">@style/NoSpaceActionBarTheme</item>
+        <item name="android:textAllCaps">false</item>
     </style>
 
     <style name="NoSpaceActionBarTheme" parent="Base.Widget.AppCompat.Toolbar">
