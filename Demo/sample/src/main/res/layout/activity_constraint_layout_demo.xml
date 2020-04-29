@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".main.ConstraintLayoutDemoActivity">
+    <!--  常规约束  -->
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Button"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="w,4:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.222"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.078" />
+    <!--  约束链  -->
+    <!--  layout_constraintHorizontal_chainStyle该属性应该在链头，左边或顶部，包含三个属性：  -->
+    <!--  spread - 元素将被展开（默认样式）  -->
+    <!--  spread_inside - 类似，但链的端点将不会扩展  -->
+    <!--  packed - 链的元素将被打包在一起。 孩子的水平或垂直偏差属性将影响包装元素的定位  -->
+    <!--  还有加权链 - 在spread模式下，如果某些小部件设置为MATCH_CONSTRAINT，则它们将拆分可用空间  -->
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Button1"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintHorizontal_weight="4"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/button2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Button2"
+        app:layout_constraintHorizontal_weight="2"
+        app:layout_constraintLeft_toRightOf="@+id/button1"
+        app:layout_constraintRight_toLeftOf="@+id/button3"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Button3"
+        app:layout_constraintHorizontal_weight="2"
+        app:layout_constraintLeft_toRightOf="@+id/button2"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--  一个参考线，在视图上不可见，辅助布局实现  -->
+    <!--  它可以是horizontal或者 vertical的。（例如：android:orientation="vertical"）  -->
+    <!--  vertical的Guideline宽度为零，高度为ConstraintLayout的高度  -->
+    <!--  horizontal的Guideline高度为零，宽度为ConstraintLayout的高度  -->
+    <!--  定位Guideline有三种方式：  -->
+    <!--  指定距离左侧或顶部的固定距离（layout_constraintGuide_begin）  -->
+    <!--  指定距离右侧或底部的固定距离（layout_constraintGuide_end）  -->
+    <!--  指定在父控件中的宽度或高度的百分比（layout_constraintGuide_percent）  -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="100dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="291dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

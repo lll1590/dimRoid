@@ -17,7 +17,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".dagger.DaggerDemoActivity"/>
+        <activity android:name=".dagger.DaggerDemoActivity" />
+        <activity android:name=".main.ConstraintLayoutDemoActivity"/>
     </application>
 
 </manifest>
